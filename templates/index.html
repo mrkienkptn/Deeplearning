@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+	<title>SR Image</title>
+</head>
+<body>
+	<h1>Super resolution image</h1>
+
+	<div class="form">
+		<form action="/upload-image", method="POST", enctype="multipart/form-data" >
+			<input oninput="filesize(this);" type="file" name="image">
+			<input type="submit" value="Upload Image" name="submit">
+		</form>
+	</div>
+	<p>Choose your picture type before Process</p>
+	<form  id="process-form" action="/process-image/{{data.image_name}}" method="POST" >
+		<input class="type" type="radio" name="picture_type" value="face" id="face_im"> <label for="face_pic">Face Image</label>
+		<input class="type" type="radio" name="picture_type" value="normal_im" id="normal_im"> <label for="face_pic">Normal Image</label>
+		<input type="submit" value="Process">
+	</form>
+	
+
+	<div class="download">
+		<a href="/download-image/{{data.image_name_down}}">Download</a>
+	</div>
+
+	<div id="status">{{data.status}}</div>
+	{% block script %}
+
+		<script type="text/javascript">
+			
+			function filesize(elem){
+				console.log(elem.files[0].name)
+				document.cookie = `filesize=${elem.files[0].size}`;
+				document.cookie = `filename=${elem.files[0].name}`;
+			}
+
+		</script>
+
+	{% endblock %}
+	<script type="text/javascript" src="{{ url_for('static', filename='javascript/jquery-3.4.1.min.js') }}"></script>
+	<!-- <script type="text/javascript" src="{{ url_for('static', filename='javascript/process-ajax.js') }}"></script> -->
+</body>
+</html>
