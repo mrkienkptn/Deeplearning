@@ -10,7 +10,7 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.applications.vgg19 import VGG19
 from network import Generator
 from tensorflow.keras.models import load_model
-from matplotlib import pyplot
+
 
 Image.MAX_IMAGE_PIXELS = None
 LR_SIZE = 24
@@ -220,27 +220,26 @@ def make_full_image(image_name):
 ###################################### for face
 
 generator_face = Generator((128, 128, 3)).generator()
-generator_face.load_weights('with_only_gener_savepoint_4.h5')
+generator_face = load_model('with_only_gener_savepoint_4.h5')
 def make_face_image(filename):
-
+    print("In here")
     
     img = Image.open(filename)
     img = np.array(img)
     img = normalize_m11(img)
     img = img.reshape([1, 128, 128, 3])
     # print(img)
-    new_im = generator_face.predict_on_batch(img)
+    new_im = generator_face(img)
     # print(new_im)
     new_im = denormalize_m11(new_im)
     new_im = tf.reshape(new_im ,[128,128,3])
     new_im = tf.cast(new_im, dtype = tf.int32)
     new_im = np.array(new_im)
-    print("type new im:", type(new_im))
+    # print("type new im:", type(new_im))
     print(new_im)
     image = Image.fromarray(new_im, 'RGB')
     
     return image
 
-t = make_face_image("100999164_1144824485895357_4706054408494907392_n.png")
-t.show()
+
 

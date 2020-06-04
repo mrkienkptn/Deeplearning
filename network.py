@@ -11,7 +11,7 @@ from keras.layers import Dense
 from keras.layers.core import Activation
 from keras.layers.core import Flatten
 from keras.layers.convolutional import UpSampling2D
-
+from keras.models import load_model
 
 class Generator():
     def __init__(self, noise_shape):
