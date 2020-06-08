@@ -1,16 +1,21 @@
+import keras.backend.tensorflow_backend as tb
+tb._SYMBOLIC_SCOPE.value = True
 
 from flask import Flask, flash, request, redirect, url_for, render_template, jsonify, send_from_directory, send_file
 # from flask_resful import reqparse
 import os
 from werkzeug.utils import secure_filename
-from model import make_full_image, make_face_image
+from process_normal_img import make_full_image
+from process_face_img import generate
 from PIL import Image
+
+
 app = Flask(__name__)
 
 app.config["IMAGE_UPLOADS"] = "./static/images/upload"
 app.config["IMAGE_GEN"] = "./static/images/gen"
 app.config["ALLOW_IMAGE_EXTENTIONS"] = ["png", "jpg", "jpeg"]
-app.config["MAX_SIZE"] = 1024*512
+app.config["MAX_SIZE"] = 2000*2000
 app.config["MIN_SIZE"] = 10
 
 def allow_image(filename):
@@ -87,7 +92,7 @@ def process_image(path):
 		gen_image.save(os.path.join(app.config["IMAGE_GEN"], name))
 
 	if type_im == 'face':
-		gen_image = make_face_image(image_path)
+		gen_image = generate(image_path)
 
 		gen_image.save(os.path.join(app.config["IMAGE_GEN"], name))
 

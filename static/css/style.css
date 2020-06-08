@@ -1,3 +1,42 @@
-*{
-	font-size: 20px;
+
+h1{
+	text-align: center;
+	color: rgb(0, 94, 131);
+}
+
+.form{
+	width: 80% ;
+	margin: auto;
+	margin-top: 30px;
+	border: 2px solid;
+}
+
+.form form input{
+	display: block;
+	margin: 30px;
+}
+input, a{
+	text-decoration: none;
+	background-color: rgba(32, 160, 0, 0.973);
+	padding: 5px 6px;
+	color: white;
+	border: none;
+	border-radius: 2px;
+}
+.form form input:nth-child(1){
+	background-color: white;
+}
+input#file-upload-button{
+	background-color: rgba(32, 160, 0, 0.973);
+	padding: 5px 6px;
+	color: white;
+	border: none;
+	border-radius: 2px;
+}
+#process-form{
+	text-align: center;
+}
+.download{
+	text-align: center;
+	margin-top: 30px;
 }

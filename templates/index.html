@@ -13,8 +13,9 @@
 			<input type="submit" value="Upload Image" name="submit">
 		</form>
 	</div>
-	<p>Choose your picture type before Process</p>
+	
 	<form  id="process-form" action="/process-image/{{data.image_name}}" method="POST" >
+		<p>Choose your picture type before Process</p>
 		<input class="type" type="radio" name="picture_type" value="face" id="face_im"> <label for="face_pic">Face Image</label>
 		<input class="type" type="radio" name="picture_type" value="normal_im" id="normal_im"> <label for="face_pic">Normal Image</label>
 		<input type="submit" value="Process">

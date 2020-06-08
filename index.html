@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="./static/css/style.css">
+	<title>SR Image</title>
+</head>
+<body>
+	<h1>Super resolution image</h1>
+
+	<div class="form">
+		<form action="/upload-image", method="POST", enctype="multipart/form-data" >
+			<input oninput="filesize(this);" type="file" name="image" value="Choose Image">
+			<input type="submit" value="Upload Image" name="submit"> 
+		</form>
+	</div>
+	
+    <form  id="process-form" action="/process-image/{{data.image_name}}" method="POST" >
+        <p>Choose your picture type before Process</p>
+		<input class="type" type="radio" name="picture_type" value="face" id="face_im"> <label for="face_pic">Face Image</label>
+		<input class="type" type="radio" name="picture_type" value="normal_im" id="normal_im"> <label for="face_pic">Normal Image</label>
+		<input type="submit" value="Process">
+	</form>
+	
+
+	<div class="download">
+		<a href="/download-image/{{data.image_name_down}}">Download</a>
+	</div>
+
+	
+</body>
+</html>
