@@ -72,7 +72,9 @@ def upload_image():
 			return redirect(request.url)
 	data = {
 			'image_name' :request.cookies.get("filename"),
-			'status' : 'Upload Successfully'
+			'status' : 'Upload Successfully',
+			'src1': os.path.join(app.config['IMAGE_UPLOADS'], request.cookies.get("filename")),
+			'src2': ''
 		}
 
 	return render_template("index.html", data=data)
@@ -98,8 +100,9 @@ def process_image(path):
 
 	data = {
 			'image_name_down' :request.cookies.get("filename"),
-			'status' : 'Process Completed'
-
+			'status' : 'Process Completed',
+			'src1':os.path.join(app.config['IMAGE_UPLOADS'], request.cookies.get("filename")),
+			'src2': os.path.join(app.config['IMAGE_GEN'], request.cookies.get("filename"))
 		}
 	return render_template('index.html', data=data)
 
@@ -109,7 +112,8 @@ def download_image(path):
 	if not os.path.exists(os.path.join(app.config["IMAGE_GEN"], name)):
 		data = {
 			'image_name': '',
-			'status':'No thing to download'
+			'status':'No thing to download',
+			'src': ''
 		}
 		return render_template('index.html', data=data)
 	# return send_from_directory(app.config["IMAGE_GEN"], name, as_attachment=True)
@@ -119,7 +123,8 @@ def download_image(path):
 def index():
 	data = {
 			'image_name': '',
-			'status':''
+			'status':'',
+			'src': ''
 		}
 	return render_template("index.html", data=data)
 

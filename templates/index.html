@@ -15,18 +15,24 @@
 	</div>
 	
 	<form  id="process-form" action="/process-image/{{data.image_name}}" method="POST" >
-		<p>Choose your picture type before Process</p>
+		<h2>Choose your picture type before Processing</h2>
 		<input class="type" type="radio" name="picture_type" value="face" id="face_im"> <label for="face_pic">Face Image</label>
 		<input class="type" type="radio" name="picture_type" value="normal_im" id="normal_im"> <label for="face_pic">Normal Image</label>
-		<input type="submit" value="Process">
+		<input type="submit" value="Process" id="process-btn" style="display: block; margin: auto; margin-top: 15px;">
+		<p style="text-align: center; display: block; color: rgb(0, 94, 131);" id="stt"> {{data.status}} </p>
 	</form>
 	
-
+	<div class="im" style="margin-top: 30px;">
+		
+		<img src="../{{data.src1}}" alt="non" width="384">
+		
+		<img src="../{{data.src2}}" alt="non" width="384">
+	</div>
 	<div class="download">
 		<a href="/download-image/{{data.image_name_down}}">Download</a>
 	</div>
 
-	<div id="status">{{data.status}}</div>
+
 	{% block script %}
 
 		<script type="text/javascript">
@@ -36,7 +42,9 @@
 				document.cookie = `filesize=${elem.files[0].size}`;
 				document.cookie = `filename=${elem.files[0].name}`;
 			}
-
+			document.getElementById('process-btn').addEventListener('click', function(){
+				document.getElementById('stt').innerHTML='Processing...'
+			})
 		</script>
 
 	{% endblock %}
